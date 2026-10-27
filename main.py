@@ -2,6 +2,13 @@ import sys
 import os
 import time
 
+game_of_life_rules = (
+    "Underpopulation: A live cell with fewer than 2 live neighbors dies.",
+    "Survival: A live cell with 2 or 3 live neighbors survives to the next generation.",
+    "Overpopulation: A live cell with more than 3 live neighbors dies.",
+    "Reproduction: A dead cell with exactly 3 live neighbors becomes a live cell.",
+)
+
 def error(code):
     match code:
         case 0:
@@ -95,6 +102,44 @@ def ask_user_for_cell_placement(grid):
             error(3)
             time.sleep(1.5)
 
+def show_rules():
+    ...
+
+def show_and_pick_patterns(grid):
+    ...
+
+def display_game_options(grid):
+    os.system("clear")
+    render_grid(grid)
+    print("============================")
+    print("Welcome to the Game of Life!")
+    print("============================")
+    print("Options:")
+    print("1. Place cells manually")
+    print("2. Pick from existing patterns (Default)")
+    print("3. See the rules of Game of Life")
+    print("4. Exit the program")
+    print("============================")
+
+    while True:
+        user_input = int(input("Enter an option (1-4): ") or 2)
+
+        match user_input:
+            case 1:
+                ask_user_for_cell_placement(grid)
+                break
+            case 2:
+                show_and_pick_patterns(grid)
+                break
+            case 3:
+                show_rules()
+                break
+            case 4:
+                error(0)
+                break
+            case _:
+                error(1)
+
 def main():
     handle_program_start()
 
@@ -103,9 +148,7 @@ def main():
     
     grid = create_grid(rows, cols) # (Height, Width)
 
-
-
-
+    display_game_options(grid)
 
     program_running = True
 
