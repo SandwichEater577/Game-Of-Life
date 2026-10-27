@@ -31,26 +31,43 @@ def handle_program_start(type=None):
             return 
 
 def create_grid(rows, cols): # (Height, Width)
-    new_grid = [[""] * cols for _ in range(rows)]
+    new_grid = [[0] * cols for _ in range(rows)]
     return new_grid
 
 def render_grid(grid):
+    width = len(grid[0])
+
+    print("╔" + "═" * width + "╗") # ASCII chars taken from: https://www.asciiart.eu/ascii-borders/maker
+    
     for row in grid:
+        print("║", end="")
         for cell in row:
             if cell == 1:
                 print("█", end="")
             else:
                 print(" ", end="")
-        print()
+        print("║")
+    print("╚" + "═" * width + "╝")
 
 def main():
     handle_program_start()
-    grid = create_grid(20, 20) # (Height, Width)
+
+    cols = int(input("Enter columns count (Width in cells)(Default: 20): ")or 20)
+    rows = int(input("Enter rows count (Height in cells)(Default: 20): ")or 20)
+    
+    grid = create_grid(rows, cols) # (Height, Width)
+
+
     program_running = True
-    while program_running:
-        os.system("clear")
-        render_grid(grid)
-        time.sleep(0.2)
-        
+
+    try:
+        while program_running:
+            os.system("clear")
+            render_grid(grid)
+            time.sleep(0.2)
+    except KeyboardInterrupt:
+        print("\n \n Exiting Game of Life... \n \n")
+        sys.exit()
+
 if __name__ == "__main__":
     main()
