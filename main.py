@@ -1,4 +1,6 @@
 import sys
+import os
+import time
 
 def error(code):
     match code:
@@ -46,7 +48,9 @@ def main():
     grid = create_grid(20, 20) # (Height, Width)
     program_running = True
     while program_running:
+        os.system("clear")
         render_grid(grid)
+        time.sleep(0.2)
         
 if __name__ == "__main__":
     main()
