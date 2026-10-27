@@ -34,7 +34,7 @@ def create_grid(rows, cols): # (Height, Width)
 
 def render_grid(grid):
     for row in grid:
-        for cell in cell:
+        for cell in row:
             if cell == 1:
                 print("█", end="")
             else:
@@ -47,6 +47,6 @@ def main():
     program_running = True
     while program_running:
         render_grid(grid)
-
+        
 if __name__ == "__main__":
     main()
