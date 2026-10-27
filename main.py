@@ -9,6 +9,8 @@ def error(code):
             sys.exit()
         case 1:
             print("Invalid Option, please try again.")
+        case 2:
+            print("Cell placement is out of bounds.")
 
 def handle_program_start(type=None):
     match type:
@@ -51,7 +53,10 @@ def render_grid(grid):
     print("╚" + "═" * width + "╝")
 
 def put_cell(grid, row, col):
-    ...
+    if 0 <= row < len(grid) and 0 <= col < len(grid[0]):
+        grid[row][col] = 1
+    else:
+        error(2)
 
 def ask_user_for_cell_placement(grid):
     ...
