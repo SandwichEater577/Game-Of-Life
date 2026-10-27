@@ -37,7 +37,8 @@ def create_grid(rows, cols): # (Height, Width)
 def render_grid(grid):
     width = len(grid[0])
 
-    print("╔" + "═" * width + "╗") # ASCII chars taken from: https://www.asciiart.eu/ascii-borders/maker
+    # ASCII chars taken from: https://www.asciiart.eu/ascii-borders/maker
+    print("╔" + "═" * width + "╗") 
     
     for row in grid:
         print("║", end="")
