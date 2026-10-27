@@ -50,6 +50,15 @@ def render_grid(grid):
         print("║")
     print("╚" + "═" * width + "╝")
 
+def put_cell(grid, row, col):
+    ...
+
+def ask_user_for_cell_placement(grid):
+    ...
+
+def preview_grid(grid):
+    ...
+
 def main():
     handle_program_start()
 
