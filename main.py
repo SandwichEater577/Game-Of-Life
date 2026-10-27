@@ -32,11 +32,21 @@ def create_grid(rows, cols): # (Height, Width)
     new_grid = [[""] * cols for _ in range(rows)]
     return new_grid
 
+def render_grid(grid):
+    for row in grid:
+        for cell in cell:
+            if cell == 1:
+                print("█", end="")
+            else:
+                print(" ", end="")
+        print()
+
 def main():
     handle_program_start()
     grid = create_grid(20, 20) # (Height, Width)
-    print(grid[0][0])
-    
+    program_running = True
+    while program_running:
+        render_grid(grid)
 
 if __name__ == "__main__":
     main()
