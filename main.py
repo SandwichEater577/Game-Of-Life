@@ -11,6 +11,8 @@ def error(code):
             print("Invalid Option, please try again.")
         case 2:
             print("Cell placement is out of bounds.")
+        case 3:
+            print("Invalid format! Please use 'row, col' (e.g., 5, 5).")
 
 def handle_program_start(type=None):
     match type:
@@ -54,12 +56,38 @@ def render_grid(grid):
 
 def put_cell(grid, row, col):
     if 0 <= row < len(grid) and 0 <= col < len(grid[0]):
-        grid[row][col] = 1
+        if grid[row][col] == 0:
+            grid[row][col] = 1
+        else:
+            grid[row][col] = 0
     else:
         error(2)
 
 def ask_user_for_cell_placement(grid):
-    ...
+    while True:
+        os.system("clear")
+        render_grid(grid)
+
+        print("\n Type coordinates to place a cell (row, col)")
+        print("If the cell is already alive, it will be exterminated.")
+        print("EXAMPLE: 10, 10")
+        print("If you want to finish placing cells, press Enter without typing anything.")
+
+        user_input = input("> ")
+
+        if user_input == "":
+            break
+
+        try:
+            parts = user_input.split(",")
+
+            row = int(parts[0].strip())
+            col = int(parts[1].strip())
+
+            put_cell(grid, row, col)
+        except (ValueError, IndexError):
+            error(3)
+            time.sleep(1.5)
 
 def preview_grid(grid):
     ...
