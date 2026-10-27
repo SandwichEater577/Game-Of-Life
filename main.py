@@ -7,24 +7,28 @@ def error(code):
             sys.exit()
         case 1:
             print("Invalid Option, please try again.")
-            main(1)
+            handle_program_start(1)
 
-def main(type=None):
+def handle_program_start(type=None):
     match type:
         case None:
-            print("Game of Life")
+            print("Game of Life (Wrote on Python 3.14.8)")
             user_input = input("Press Enter to start 'Game of Life' OR type 'exit' to quit: ")
             match user_input:
                 case "":
-                    main(2)
+                    handle_program_start(2)
                 case "exit":
                     error(0)
                 case _:
                     error(1)
         case 1:
             input("Press Enter to continue: ")
+            handle_program_start(2)
+        case 2:
+            main()
 
+def main():
+    ...
 
 if __name__ == "__main__":
     main()
-    
