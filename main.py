@@ -28,7 +28,8 @@ def handle_program_start(type=None):
             main()
 
 def main():
-    ...
+    handle_program_start()
+    
 
 if __name__ == "__main__":
     main()
