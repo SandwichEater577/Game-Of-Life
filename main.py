@@ -69,6 +69,7 @@ def ask_user_for_cell_placement(grid):
         render_grid(grid)
 
         print("\n Type coordinates to place a cell (row, col)")
+        print("If u want to preview the grid, type 'p' and press Enter.")
         print("If the cell is already alive, it will be exterminated.")
         print("EXAMPLE: 10, 10")
         print("If you want to finish placing cells, press Enter without typing anything.")
@@ -77,6 +78,11 @@ def ask_user_for_cell_placement(grid):
 
         if user_input == "":
             break
+        if user_input == "p":
+            os.system("clear")
+            render_grid(grid)
+            input("\nPress Enter to return to placement mode...")
+            continue
 
         try:
             parts = user_input.split(",")
@@ -89,9 +95,6 @@ def ask_user_for_cell_placement(grid):
             error(3)
             time.sleep(1.5)
 
-def preview_grid(grid):
-    ...
-
 def main():
     handle_program_start()
 
@@ -99,6 +102,9 @@ def main():
     rows = int(input("Enter rows count (Height in cells)(Default: 20): ")or 20)
     
     grid = create_grid(rows, cols) # (Height, Width)
+
+
+
 
 
     program_running = True
