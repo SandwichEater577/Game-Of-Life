@@ -80,25 +80,16 @@ def error(code):
         case 3:
             print("Invalid format! Please use 'row, col' (e.g., 5, 5).")
 
-def handle_program_start(type=None):
-    match type:
-        case None:
-            while True:
-                print("Game of Life (Wrote on Python 3.14.8)")
-                user_input = input("Press Enter to start 'Game of Life' OR type 'exit' to quit: ")
-                match user_input:
-                    case "":
-                        handle_program_start(2)
-                        return 
-                    case "exit":
-                        error(0)
-                    case _:
-                        error(1)
-        case 1:
-            input("Press Enter to continue: ")
-            handle_program_start(2)
-        case 2:
-            return 
+def handle_program_start():
+    while True:
+        print("Game of Life (Wrote on Python 3.14.8)")
+        user_input = input("Press Enter to start 'Game of Life' OR type 'exit' to quit: ")
+        if user_input == "":
+            return
+        elif user_input == "exit":
+            error(0)
+        else:
+            error(1)
 
 def create_grid(rows, cols): # (Height, Width)
     new_grid = [[0] * cols for _ in range(rows)]
@@ -138,7 +129,7 @@ def ask_user_for_cell_placement(grid):
         print("If u want to preview the grid, type 'p' and press Enter.")
         print("If the cell is already alive, it will be exterminated.")
         print("EXAMPLE: 10, 10")
-        print("If you want to finish placing cells, press Enter without typing anything.")
+        print("Press Enter without typing anything to go back to the menu.")
 
         user_input = input("> ")
 
@@ -152,10 +143,8 @@ def ask_user_for_cell_placement(grid):
 
         try:
             parts = user_input.split(",")
-
             row = int(parts[0].strip())
             col = int(parts[1].strip())
-
             put_cell(grid, row, col)
         except (ValueError, IndexError):
             error(3)
@@ -173,13 +162,11 @@ def show_rules():
 
 def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
     pattern = pattern_dict["pattern"]
-
     for r in range(len(pattern)):
         for c in range(len(pattern[0])): 
             if pattern[r][c] == 1:
                 grid_r = offset_row + r
                 grid_c = offset_col + c
-                
                 if 0 <= grid_r < len(grid) and 0 <= grid_c < len(grid[0]):
                     grid[grid_r][grid_c] = 1
 
@@ -211,40 +198,43 @@ def show_and_pick_patterns(grid, patterns=PATTERNS):
         time.sleep(1.5)
 
 def display_game_options(grid):
-    os.system("clear")
-    render_grid(grid)
-    print("============================")
-    print("Welcome to the Game of Life!")
-    print("============================")
-    print("Options:")
-    print("1. Place cells manually")
-    print("2. Pick from existing patterns (Default)")
-    print("3. See the rules of Game of Life")
-    print("4. Exit the program")
-    print("============================")
+    while True: 
+        os.system("clear")
+        render_grid(grid)
+        print("============================")
+        print("Welcome to the Game of Life!")
+        print("============================")
+        print("Options:")
+        print("1. Place cells manually")
+        print("2. Pick from existing patterns (Default)")
+        print("3. See the rules of Game of Life")
+        print("4. Start game")
+        print("5. Exit the program")
+        print("============================")
 
-    while True:
         try:
-            user_input = int(input("Enter an option (1-4): ") or 2)
+            user_input = int(input("Enter an option (1-5): ") or 2)
         except ValueError:
             error(1)
+            time.sleep(1.5)
             continue
 
         match user_input:
             case 1:
                 ask_user_for_cell_placement(grid)
-                break
             case 2:
                 show_and_pick_patterns(grid)
-                break
             case 3:
                 show_rules()
             case 4:
-                error(0)
                 break
+            case 5:
+                print("Exiting...")
+                sys.exit()
             case _:
                 error(1)
-                
+                time.sleep(1.5)
+
 def count_neighbors(grid, row, column):
     count = 0
     for dr in (-1, 0, 1):
@@ -273,15 +263,18 @@ def next_generation(grid):
 def main():
     handle_program_start()
 
-    try:
-        cols = int(input("Enter columns count (Width in cells)(Default: 20): ")or 20)
-        rows = int(input("Enter rows count (Height in cells)(Default: 20): ")or 20)
-
-    except ValueError:
-
-        print("Invalid input, defaulting to 20x20.")
-        cols, rows = 20, 20
-        time.sleep(1.5)
+    while True:
+        try:
+            cols = int(input("Enter columns count (Width in cells)(Default: 20): ") or 20)
+            rows = int(input("Enter rows count (Height in cells)(Default: 20): ") or 20)
+            if cols <= 0 or rows <= 0:
+                print("Error: Grid size must be greater than 0.")
+                time.sleep(1.5)
+                continue
+            break
+        except ValueError:    
+            print("Invalid input, please enter a number.")
+            time.sleep(1.5)
 
     grid = create_grid(rows, cols) # (Height, Width)
 
@@ -291,15 +284,10 @@ def main():
 
     try:
         while program_running:
-
             os.system("clear")
-            
             render_grid(grid)
-
             time.sleep(0.2)
-
             grid = next_generation(grid)
-
     except KeyboardInterrupt:
         print("\n \n Exiting Game of Life... \n \n")
         sys.exit()
