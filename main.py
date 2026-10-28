@@ -163,7 +163,7 @@ def show_rules():
 def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
     pattern = pattern_dict["pattern"]
     for r in range(len(pattern)):
-        for c in range(len(pattern[0])): 
+        for c in range(len(pattern[r])): 
             if pattern[r][c] == 1:
                 grid_r = offset_row + r
                 grid_c = offset_col + c
