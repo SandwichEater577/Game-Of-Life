@@ -170,6 +170,18 @@ def show_rules():
     print("============================")
     input("\nPress Enter to return to the main menu...")
 
+def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
+    pattern = pattern_dict["pattern"]
+
+    for r in range(len(pattern)):
+        for c in range(len(pattern)): 
+            if pattern[r][c] == 1:
+                grid_r = offset_row + r
+                grid_c = offset_col + c
+                
+                if 0 <= grid_r < len(grid) and 0 <= grid_c < len(grid[0]):
+                    grid[grid_r][grid_c] = 1
+
 def show_and_pick_patterns(grid):
     ...
 
@@ -187,7 +199,11 @@ def display_game_options(grid):
     print("============================")
 
     while True:
-        user_input = int(input("Enter an option (1-4): ") or 2)
+        try:
+            user_input = int(input("Enter an option (1-4): ") or 2)
+        except ValueError:
+            error(1)
+            continue
 
         match user_input:
             case 1:
