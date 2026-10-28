@@ -9,7 +9,7 @@ game_of_life_rules = (
     "Reproduction: A dead cell with exactly 3 live neighbors becomes a live cell.",
 )
 
-# Patterns taken from: https://en.wikipedia.org/wiki/Conway's_Game_of_Life
+# Patterns taken from: https://en.wikipedia.org/wiki/Conway's_Game_of_Life 
 PATTERNS = [
     {
         "name": "Blinker",
