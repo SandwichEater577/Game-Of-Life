@@ -9,6 +9,64 @@ game_of_life_rules = (
     "Reproduction: A dead cell with exactly 3 live neighbors becomes a live cell.",
 )
 
+PATTERNS = [
+    {
+        "name": "Blinker",
+        "min_size": (3, 3),
+        "pattern": [
+            [0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 0]
+        ]   
+    },
+    {
+        "name": "Toad",
+        "min_size": (4, 4),
+        "pattern": [
+            [0, 1, 1, 1],
+            [1, 1, 1, 0]
+        ]
+    },
+    {
+        "name": "Beacon",
+        "min_size": (4, 4),
+        "pattern": [
+            [1, 1, 0, 0],
+            [1, 1, 0, 0],
+            [0, 0, 1, 1],
+            [0, 0, 1, 1]
+        ]
+    },
+    {
+        "name": "Pulsar",
+        "min_size": (13, 13),
+        "pattern": [
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0]
+        ]
+    },
+    {
+        "name": "Penta-decathlon",
+        "min_size": (10, 3),
+        "pattern": [
+            [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0],
+            [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+            [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0]
+        ]
+    }
+]
+
 def error(code):
     match code:
         case 0:
@@ -103,7 +161,14 @@ def ask_user_for_cell_placement(grid):
             time.sleep(1.5)
 
 def show_rules():
-    ...
+    os.system("clear")
+    print("============================")
+    print("Rules of Game of Life:")
+    print("============================")
+    for rule in game_of_life_rules:
+        print(rule)
+    print("============================")
+    input("\nPress Enter to return to the main menu...")
 
 def show_and_pick_patterns(grid):
     ...
