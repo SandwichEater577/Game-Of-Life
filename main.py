@@ -293,4 +293,8 @@ def main():
         sys.exit()
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n \n Program terminated by user. \n \n")
+        sys.exit()
