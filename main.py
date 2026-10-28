@@ -9,6 +9,7 @@ game_of_life_rules = (
     "Reproduction: A dead cell with exactly 3 live neighbors becomes a live cell.",
 )
 
+# Patterns taken from: https://en.wikipedia.org/wiki/Conway's_Game_of_Life
 PATTERNS = [
     {
         "name": "Blinker",
@@ -58,11 +59,11 @@ PATTERNS = [
     },
     {
         "name": "Penta-decathlon",
-        "min_size": (10, 3),
+        "min_size": (16, 9),
         "pattern": [
-            [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0],
-            [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
-            [0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0]
+            [1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1],
+            [1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1],
+            [1, 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1]
         ]
     }
 ]
@@ -298,7 +299,7 @@ def main():
             time.sleep(0.2)
 
             grid = next_generation(grid)
-            
+
     except KeyboardInterrupt:
         print("\n \n Exiting Game of Life... \n \n")
         sys.exit()
