@@ -174,7 +174,7 @@ def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
     pattern = pattern_dict["pattern"]
 
     for r in range(len(pattern)):
-        for c in range(len(pattern)): 
+        for c in range(len(pattern[0])): 
             if pattern[r][c] == 1:
                 grid_r = offset_row + r
                 grid_c = offset_col + c
@@ -182,8 +182,32 @@ def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
                 if 0 <= grid_r < len(grid) and 0 <= grid_c < len(grid[0]):
                     grid[grid_r][grid_c] = 1
 
-def show_and_pick_patterns(grid):
-    ...
+def show_and_pick_patterns(grid, patterns=PATTERNS):
+    os.system("clear")
+    print("============================")
+    print("Available Patterns:")
+    print("============================")
+    for i, p in enumerate(patterns):
+        print(f"{i + 1}. {p['name']}")
+    print("0. Go back")
+
+    try:
+        choice = int(input("\nPick a number: "))
+        if choice == 0:
+            return
+        selected_pattern = patterns[choice - 1]
+
+        os.system("clear")
+        render_grid(grid)
+        print(f"\nWhere do you want to place the {selected_pattern['name']}?")
+        row = int(input("Enter the starting row (0-indexed): "))
+        col = int(input("Enter the starting column (0-indexed): "))
+
+        push_pattern_to_grid(grid, selected_pattern, row, col)
+        time.sleep(1.5)
+    except (ValueError, IndexError):
+        error(3)
+        time.sleep(1.5)
 
 def display_game_options(grid):
     os.system("clear")
@@ -214,12 +238,12 @@ def display_game_options(grid):
                 break
             case 3:
                 show_rules()
-                break
             case 4:
                 error(0)
                 break
             case _:
                 error(1)
+                
 
 def main():
     handle_program_start()
