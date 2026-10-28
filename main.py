@@ -244,13 +244,44 @@ def display_game_options(grid):
             case _:
                 error(1)
                 
+def count_neighbors(grid, row, column):
+    count = 0
+    for dr in (-1, 0, 1):
+        for dc in (-1, 0, 1):
+            if dr == 0 and dc == 0:
+                continue
+            nr = (row + dr) % len(grid)
+            nc = (column + dc) % len(grid[0])
+            if grid[nr][nc] == 1:
+                count += 1
+    return count
+
+def next_generation(grid):
+    new_grid = create_grid(len(grid), len(grid[0]))
+    for r in range(len(grid)):
+        for c in range(len(grid[0])):
+            neighbors = count_neighbors(grid, r, c)
+            current_cell = grid[r][c]
+            
+            if current_cell == 1 and (neighbors == 2 or neighbors == 3):
+                new_grid[r][c] = 1
+            elif current_cell == 0 and neighbors == 3:
+                new_grid[r][c] = 1
+    return new_grid
 
 def main():
     handle_program_start()
 
-    cols = int(input("Enter columns count (Width in cells)(Default: 20): ")or 20)
-    rows = int(input("Enter rows count (Height in cells)(Default: 20): ")or 20)
-    
+    try:
+        cols = int(input("Enter columns count (Width in cells)(Default: 20): ")or 20)
+        rows = int(input("Enter rows count (Height in cells)(Default: 20): ")or 20)
+
+    except ValueError:
+
+        print("Invalid input, defaulting to 20x20.")
+        cols, rows = 20, 20
+        time.sleep(1.5)
+
     grid = create_grid(rows, cols) # (Height, Width)
 
     display_game_options(grid)
@@ -259,9 +290,15 @@ def main():
 
     try:
         while program_running:
+
             os.system("clear")
+            
             render_grid(grid)
+
             time.sleep(0.2)
+
+            grid = next_generation(grid)
+            
     except KeyboardInterrupt:
         print("\n \n Exiting Game of Life... \n \n")
         sys.exit()
