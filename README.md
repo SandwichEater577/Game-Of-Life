@@ -1,28 +1,42 @@
-# Game of Life
+ # Game of Life
 
-### Implemented in Python.
+A fully playable terminal implementation of Conway's Game of Life built in Python.
+
+## Description
+
+Conway's Game of Life is a cellular automaton invented by John Conway. This implementation runs in the console with Unicode borders, allowing users to place cells and stamp patterns.
+
+## Screenshots
 
 ![Main Menu](Images/MainMenu.png)
-
-Explanation:
-The Game of Life is not your typical computer game. It is a cellular automaton, and was invented by Cambridge mathematician John Conway.
-
-This game became widely known when it was mentioned in an article published by Scientific American in 1970. It consists of a grid of cells which, based on a few mathematical rules, can live, die or multiply. Depending on the initial conditions, the cells form various patterns throughout the course of the game.
-(source: wiki)
-
-### Pattern Previews
-
 ![Available Patterns](Images/AvailablePatterns.png)
 ![Penta-Decathlon](Images/Penta-DecathlonPreview.png)
 
-# Game of Life Rules:
+## Getting Started
 
-### For a space that is populated:
+### Dependencies
 
-- Each cell with one or no neighbors dies, as if by solitude.
-- Each cell with four or more neighbors dies, as if by overpopulation.
-- Each cell with two or three neighbors survives.
+Requires Python 3.10 or higher due to `match/case` syntax and works on Windows, macOS, and Linux.
 
-### For a space that is empty or unpopulated:
+### Installing
 
-- Each cell with three neighbors becomes populated.
+- Download the `main.py` file directly or grab the pre-compiled `.exe` from the Releases tab.
+
+### Executing program
+
+- Open a terminal.
+- Navigate to the folder containing the program.
+- Run:
+
+```bash
+python main.py
+```
+
+## Help
+
+1. If the screen spams instead of clearing, replace `os.system("clear")` with `print("\033c", end="")`.
+2. If a `SyntaxError` occurs on startup, check your Python version.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details.
