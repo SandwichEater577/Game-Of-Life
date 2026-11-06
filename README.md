@@ -1,42 +1,99 @@
- # Game of Life
+# Conway's Game of Life
 
-A fully playable terminal implementation of Conway's Game of Life built in Python.
+A terminal-based implementation of Conway's Game of Life, written in Python.
 
-## Description
+## Overview
 
-Conway's Game of Life is a cellular automaton invented by John Conway. This implementation runs in the console with Unicode borders, allowing users to place cells and stamp patterns.
+Conway's Game of Life is a zero-player cellular automaton created by mathematician John Conway. It runs on a grid where each cell is either alive or dead. Every generation, cells update their state based on the number of living neighbours around them.
+
+Despite having only four simple rules, these interactions can produce surprisingly complex patterns, from stable structures to continuously moving formations.
+
+This project brings the simulation directly to the terminal. It uses ASCII and Unicode block characters to render the grid, with an interactive menu for editing the world, loading predefined patterns, and controlling the simulation.
+
+The world uses wrap-around boundaries, meaning cells leaving one edge reappear on the opposite side. This effectively turns the grid into a torus.
+
+## Features
+
+- **Interactive menu** — Create, remove, and manage cells without editing the source code.
+- **Pattern library** — Includes predefined patterns such as Blinker, Toad, Pulsar, and Penta-decathlon.
+- **Custom grid dimensions** — Choose the size of the simulation before starting.
+- **Real-time simulation** — Watch generations update automatically in the terminal.
+- **Toroidal boundaries** — Movement across the edges of the grid is seamless.
+- **Terminal rendering** — Uses ASCII and Unicode block characters for a clean console interface.
 
 ## Screenshots
 
-![Main Menu](Images/MainMenu.png)
-![Available Patterns](Images/AvailablePatterns.png)
-![Penta-Decathlon](Images/Penta-DecathlonPreview.png)
+|             Main Menu             |                 Available Patterns                  |
+| :-------------------------------: | :-------------------------------------------------: |
+| ![Main Menu](Images/MainMenu.png) | ![Available Patterns](Images/AvailablePatterns.png) |
 
-## Getting Started
+**Penta-decathlon preview**
 
-### Dependencies
+![Penta-decathlon](Images/Penta-DecathlonPreview.png)
 
-Requires Python 3.10 or higher due to `match/case` syntax and works on Windows, macOS, and Linux.
+## How it works
 
-### Installing
+Each cell follows four rules:
 
-- Download the `main.py` file directly or grab the pre-compiled `.exe` from the Releases tab.
+1. **Underpopulation** — A living cell with fewer than two living neighbours dies.
+2. **Survival** — A living cell with two or three living neighbours survives.
+3. **Overpopulation** — A living cell with more than three living neighbours dies.
+4. **Reproduction** — A dead cell with exactly three living neighbours becomes alive.
 
-### Executing program
+All cells update simultaneously, producing the next generation.
 
-- Open a terminal.
-- Navigate to the folder containing the program.
-- Run:
+## Getting started
+
+### Requirements
+
+- Python 3.10 or newer.
+- A terminal that supports ANSI escape sequences.
+
+No external Python packages are required.
+
+### Installation
+
+You can either download the source code or grab the precompiled Windows executable from the [Releases](../../releases) page.
+
+To download the repository:
+
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
+
+### Running
+
+Start the program with:
 
 ```bash
 python main.py
 ```
 
-## Help
+The interactive menu will guide you through setting up and running the simulation.
 
-1. If the screen spams instead of clearing, replace `os.system("clear")` with `print("\033c", end="")`.
-2. If a `SyntaxError` occurs on startup, check your Python version.
+## Troubleshooting
+
+**Terminal keeps printing new screens instead of clearing**
+
+Some terminals may not handle the default screen-clearing command correctly.
+
+Replace:
+
+```python
+os.system("clear")
+```
+
+With:
+
+```python
+print("\033c", end="")
+```
+
+**SyntaxError when starting the program**
+
+Make sure you're running Python 3.10 or newer. Earlier versions don't support the `match/case` syntax used in this project.
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
