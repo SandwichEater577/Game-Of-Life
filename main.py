@@ -68,6 +68,9 @@ PATTERNS = [
     }
 ]
 
+def clear():
+    os.system("cls" if os.name == "nt" else "clear")
+
 def error(code):
     match code:
         case 0:
@@ -122,7 +125,7 @@ def put_cell(grid, row, col):
 
 def ask_user_for_cell_placement(grid):
     while True:
-        os.system("clear")
+        clear()
         render_grid(grid)
 
         print("\n Type coordinates to place a cell (row, col)")
@@ -136,7 +139,7 @@ def ask_user_for_cell_placement(grid):
         if user_input == "":
             break
         if user_input == "p":
-            os.system("clear")
+            clear()
             render_grid(grid)
             input("\nPress Enter to return to placement mode...")
             continue
@@ -151,7 +154,7 @@ def ask_user_for_cell_placement(grid):
             time.sleep(1.5)
 
 def show_rules():
-    os.system("clear")
+    clear()
     print("============================")
     print("Rules of Game of Life:")
     print("============================")
@@ -171,7 +174,7 @@ def push_pattern_to_grid(grid, pattern_dict, offset_row, offset_col):
                     grid[grid_r][grid_c] = 1
 
 def show_and_pick_patterns(grid, patterns=PATTERNS):
-    os.system("clear")
+    clear()
     print("============================")
     print("Available Patterns:")
     print("============================")
@@ -185,7 +188,7 @@ def show_and_pick_patterns(grid, patterns=PATTERNS):
             return
         selected_pattern = patterns[choice - 1]
 
-        os.system("clear")
+        clear()
         render_grid(grid)
         print(f"\nWhere do you want to place the {selected_pattern['name']}?")
         row = int(input("Enter the starting row (0-indexed): "))
@@ -199,7 +202,7 @@ def show_and_pick_patterns(grid, patterns=PATTERNS):
 
 def display_game_options(grid):
     while True: 
-        os.system("clear")
+        clear()
         render_grid(grid)
         print("============================")
         print("Welcome to the Game of Life!")
@@ -284,7 +287,7 @@ def main():
 
     try:
         while program_running:
-            os.system("clear")
+            clear()
             render_grid(grid)
             time.sleep(0.2)
             grid = next_generation(grid)
